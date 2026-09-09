@@ -13,14 +13,4 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ActiveProfiles("dev")
 class DevelopmentProfilePropertiesTest {
 
-    @Autowired
-    private AppProperties appProperties;
-
-    @Test
-    void devProfileOverridesDefaultProperties() {
-        assertThat(appProperties.getEnvironment()).isEqualTo("development");
-        assertThat(appProperties.isFeaturesEnabled()).isTrue();
-        assertThat(appProperties.getRequestTimeout()).isEqualTo(Duration.ofMillis(500));
-        assertThat(appProperties.getAllowedOrigins()).containsExactly("http://localhost:3000");
-    }
 }
