@@ -20,6 +20,7 @@
 
     <modules>
         <module>01-quickstart</module>
+        <module>02-config</module>
     </modules>
 
     <properties>
