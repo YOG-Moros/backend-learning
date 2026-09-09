@@ -1,14 +1,6 @@
 server:
   port: 8081
 
-app:
-  name: ${APP_NAME:config-demo}
-  environment: default
-  features-enabled: false
-  request-timeout: ${APP_REQUEST_TIMEOUT:2s}
-  allowed-origins:
-    - http://localhost:3000
-    - http://localhost:5173
 spring:
   application:
     name: 02-配置管理

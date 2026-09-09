@@ -1,6 +1,0 @@
-app:
-  environment: development
-  features-enabled: true
-  request-timeout: 500ms
-  allowed-origins:
-    - http://localhost:3000
