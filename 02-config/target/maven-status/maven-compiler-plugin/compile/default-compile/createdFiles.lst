@@ -1,0 +1,4 @@
+com\example\config\ConfigApplication.class
+com\example\config\controller\ConfigController.class
+com\example\config\model\ConfigResponse.class
+com\example\config\properties\AppProperties.class
