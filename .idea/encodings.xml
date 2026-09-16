@@ -3,6 +3,18 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/01-quickstart/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/02-config/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/03-logging/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/04-web/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/05-mybatis/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/06-redis/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/07-mq/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/08-schedule/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/09-security/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/10-file/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/11-doc/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/12-test/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/13-actuator/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/14-deploy/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
   </component>

@@ -7,8 +7,20 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="01-quickstart" />
+        <module name="14-deploy" />
         <module name="02-config" />
+        <module name="12-test" />
+        <module name="10-file" />
+        <module name="11-doc" />
+        <module name="04-web" />
+        <module name="09-security" />
+        <module name="05-mybatis" />
+        <module name="07-mq" />
+        <module name="03-logging" />
+        <module name="06-redis" />
+        <module name="08-schedule" />
+        <module name="01-quickstart" />
+        <module name="13-actuator" />
       </profile>
     </annotationProcessing>
   </component>
@@ -16,6 +28,18 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="01-quickstart" options="-parameters" />
       <module name="02-config" options="-parameters" />
+      <module name="03-logging" options="-parameters" />
+      <module name="04-web" options="-parameters" />
+      <module name="05-mybatis" options="-parameters" />
+      <module name="06-redis" options="-parameters" />
+      <module name="07-mq" options="-parameters" />
+      <module name="08-schedule" options="-parameters" />
+      <module name="09-security" options="-parameters" />
+      <module name="10-file" options="-parameters" />
+      <module name="11-doc" options="-parameters" />
+      <module name="12-test" options="-parameters" />
+      <module name="13-actuator" options="-parameters" />
+      <module name="14-deploy" options="-parameters" />
     </option>
   </component>
 </project>
