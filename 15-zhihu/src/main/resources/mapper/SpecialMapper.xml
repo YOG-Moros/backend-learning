@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.cch.zhihu.mapper.SpecialMapper">
+
+    <!-- 开启了 map-underscore-to-camel-case，下划线字段自动映射到驼峰属性 -->
+    <sql id="columns">
+        id, title, introduction, banner, view_count, followers_count, is_following, category
+    </sql>
+
+    <!-- 练习 2：按分类查询 -->
+    <select id="selectByCategory" resultType="top.cch.zhihu.entity.Special">
+        SELECT
+        <include refid="columns"/>
+        FROM t_special
+        WHERE category = #{category}
+        ORDER BY followers_count DESC, id ASC
+    </select>
+
+    <!-- 练习 3：分页查询（limit / offset） -->
+    <select id="selectPageList" resultType="top.cch.zhihu.entity.Special">
+        SELECT
+        <include refid="columns"/>
+        FROM t_special
+        ORDER BY followers_count DESC, id ASC
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <select id="countAll" resultType="long">
+        SELECT COUNT(*)
+        FROM t_special
+    </select>
+
+    <select id="selectCategories" resultType="string">
+        SELECT DISTINCT category
+        FROM t_special
+        WHERE category IS NOT NULL
+        ORDER BY category
+    </select>
+</mapper>
