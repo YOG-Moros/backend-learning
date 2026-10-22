@@ -4,7 +4,7 @@ Spring Boot 后端学习父项目。当前仓库只负责统一 Maven、Java 和
 
 ## 项目配置
 
-- Spring Boot：`2.7.18`
+- Spring Boot：`3.5.8`（内置 Spring Framework `6.2.x`，提供 `org.springframework.web.servlet.resource.NoResourceFoundException` 等 Spring 6 特性）
 - Java：`21`（由 `java.version` 统一声明）
 - Maven：建议使用本机 Maven `3.9.x`；当前机器可用路径为
   `C:\\Users\\LOLI\\.m2\\wrapper\\dists\\apache-maven-3.9.11-bin\\6mqf5t809d9geo83kj4ttckcbc\\apache-maven-3.9.11`

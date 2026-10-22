@@ -1,10 +1,38 @@
 server:
-  port: 8081
+  port: 8002
 
 spring:
   application:
     name: 02-配置管理
+  profiles:
+    active: dev
 
 cch:
   name: 陈昶好
   job: 学生
+
+student:
+  name: 陈昶好
+  age: 18
+  birth-date: "2006-03-14"
+  hobbies:
+    - 篮球
+    - 编程
+  scores:
+    chinese: 90
+    math: 95
+  address:
+    province: 江苏省
+    city: 南京市
+  courses:
+    - name: 高等数学
+      credit: 4
+    - name: 大学英语
+      credit: 3
+
+app:
+  name: 配置管理模块
+  author: ${cch.name}
+  remark: SpringBoot配置学习
+  port: 8002
+  max-count: 100

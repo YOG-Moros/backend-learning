@@ -17,4 +17,54 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <dependencies>
+        <!-- Spring Boot 4 用 -spring-boot4- 的 starter -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-spring-boot4-starter</artifactId>
+            <version>3.5.17</version>
+        </dependency>
+
+        <!-- 分页插件依赖 JSqlParser，3.5.9 起拆成独立构件，需单独引入 -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-jsqlparser</artifactId>
+            <version>3.5.17</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- 8.2 练习 4：Druid 无 Boot 4 starter（boot-3 版实测 ClassNotFoundException），
+             用 Actuator 的 HikariCP 指标替代 Druid 监控页看连接池状态 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <!-- Boot 4 把 MockMvc 测试支持拆成了独立 starter，starter-test 不再包含 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webmvc-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <!-- Druid 只在 druid profile 下引入，默认构建仍是 HikariCP -->
+    <profiles>
+        <profile>
+            <id>druid</id>
+            <dependencies>
+                <!-- Druid 官方尚未发布 Boot 4 专用 starter，先用 Boot 3 版（走 AutoConfiguration.imports，实测可用性未验证） -->
+                <dependency>
+                    <groupId>com.alibaba</groupId>
+                    <artifactId>druid-spring-boot-3-starter</artifactId>
+                    <version>1.2.25</version>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
+
 </project>

@@ -8,10 +8,8 @@ import java.io.Serializable;
 
 /**
  * 知乎专题实体，对应表 t_special
- *
  * <p>id 是知乎的雪花 ID（长数字字符串），超过 JS 安全整数范围，必须用 String 接收，
  * 否则前端拿到的 id 会丢精度。</p>
- *
  * @author mqxu
  */
 @Data
