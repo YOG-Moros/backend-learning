@@ -1,5 +1,7 @@
 # backend-learning
 
+**作业批改入口：** [08 Security](08-security/README.md) · [10 接口文档](10-doc/README.md) · [11 测试](11-test/README.md) · [12 应用监控](12-actuator/README.md) · [测试与实测汇总](docs/assignments/README.md)
+
 按 `docx/` 中 14 份课程规范组织的 Spring Boot 多模块项目。使用 **Java 21、Spring Boot 4.1.1、Maven 3.9+**；每章独立启动，根 POM 只聚合模块并统一构建与依赖。
 
 ## 模块导航

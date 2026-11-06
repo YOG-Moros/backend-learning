@@ -2,7 +2,7 @@ groups:
   - name: business
     rules:
       - alert: OrderFailureRateHigh
-        expr: sum(rate(business_orders_failed_total[5m])) / clamp_min(sum(rate(business_orders_created_total[5m])) + sum(rate(business_orders_failed_total[5m])), 0.001) > 0.05
+        expr: sum(rate(business_orders_failed_total[5m])) / clamp_min(sum(rate(business_orders_total[5m])) + sum(rate(business_orders_failed_total[5m])), 0.001) > 0.05
         for: 2m
         labels:
           severity: warning

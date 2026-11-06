@@ -50,6 +50,10 @@ jobs:
       - name: 验证可选 Druid 连接池
         run: mvn -B -pl 05-mybatis -am -Pdruid test -Dspring.profiles.active=druid -Dtest=OrderLifecycleTest -Dsurefire.failIfNoSpecifiedTests=false
 
+      - name: 在 Summary 展示四份作业的测试结果
+        if: always()
+        run: python3 scripts/summarize-homework-tests.py --origin ci --source-ref "${{ github.sha }}" >> "$GITHUB_STEP_SUMMARY"
+
       - name: 保存测试、覆盖率与 OpenAPI 报告
         if: always()
         uses: actions/upload-artifact@v7
