@@ -1,0 +1,84 @@
+server:
+  port: 8006
+
+spring:
+  application:
+    name: 06-redis 缓存模块
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password:
+      database: 10
+      timeout: 3s
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 2
+          max-wait: 1s
+  cache:
+    type: redis
+    redis:
+      time-to-live: 10m
+      cache-null-values: true
+      key-prefix: "cache:"
+      use-key-prefix: true
+      enable-statistics: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${DB_URL:jdbc:mysql://localhost:3306/backend_learning?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:abc123}
+    hikari:
+      pool-name: backend-learning-pool
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 3000
+      max-lifetime: 1800000
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+      data-locations: classpath:data.sql
+      encoding: UTF-8
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    banner: false
+    db-config:
+      id-type: auto
+      table-underline: true
+
+demo:
+  cache:
+    ttl: 10m
+    null-ttl: 2m
+    jitter-seconds: 30
+  lock:
+    wait-seconds: 3
+    lease-seconds: 10
+  limit:
+    window-seconds: 60
+    max-requests: 5
+
+cch:
+  jwt:
+    secret: cch-sms-login-demo-secret-key-please-replace-in-production-2026
+    expire-seconds: 7200
+  sms:
+    mock-enabled: true
+    code-expire-seconds: 300
+    send-interval-seconds: 60
+    send-daily-limit: 10
+    max-fail-count: 5
+    ccp:
+      serverIp: app.cloopen.com
+      port: 8883
+      accountSid: ${SMS_ACCOUNT_SID:}
+      accountToken: ${SMS_ACCOUNT_TOKEN:}
+      appId: ${SMS_APP_ID:}
+      templateId: 1

@@ -6,9 +6,9 @@ spring:
     name: 05-数据访问
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/backend_learning?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
-    username: root
-    password: 280101123a      # 按本机 MySQL 实际密码修改
+    url: ${DB_URL:jdbc:mysql://localhost:3306/backend_learning?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:abc123}
     hikari:                   # 连接池参数，不写就用默认值
       pool-name: backend-learning-pool
       maximum-pool-size: 10   # 池上限

@@ -1,0 +1,8 @@
+# 测试默认使用独立 Redis 数据库，仍可通过环境变量覆盖服务器地址。
+spring:
+  data:
+    redis:
+      database: 14
+cch:
+  sms:
+    mock-enabled: true

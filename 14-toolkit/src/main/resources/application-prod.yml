@@ -1,0 +1,7 @@
+toolkit:
+  captcha:
+    debug-code: false
+  sign:
+    app-secret: ${TOOLKIT_APP_SECRET}
+  crypto:
+    aes-key: ${TOOLKIT_AES_KEY}

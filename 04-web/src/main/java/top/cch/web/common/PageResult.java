@@ -5,11 +5,6 @@ import lombok.Data;
 
 import java.util.List;
 
-/**
- * 分页结果封装
- *
- * @author mqxu
- */
 @Data
 @AllArgsConstructor
 public class PageResult<T> {

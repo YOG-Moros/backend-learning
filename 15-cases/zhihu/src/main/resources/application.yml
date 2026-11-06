@@ -1,0 +1,32 @@
+server:
+  port: 8015
+
+spring:
+  application:
+    name: 15-知乎专题页面前后端交互
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${ZHIHU_DB_URL:jdbc:mysql://localhost:3306/zhihu?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true}
+    username: ${ZHIHU_DB_USERNAME:root}
+    password: ${ZHIHU_DB_PASSWORD:abc123}
+    hikari:
+      pool-name: zhihu-pool
+      maximum-pool-size: 10
+      minimum-idle: 2
+      connection-timeout: 3000
+
+mybatis-plus:
+  # 手写 SQL 放在 resources/mapper 下
+  mapper-locations: classpath*:/mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    # 开发期打印 SQL，上线关掉
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    banner: false
+    db-config:
+      table-underline: true
+
+logging:
+  level:
+    top.cch.zhihu: debug

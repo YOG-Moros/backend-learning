@@ -1,0 +1,105 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  # 使用临时数据库与 Redis 验证全部模块，不连接开发机数据。
+  build:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.4
+        env:
+          MYSQL_ROOT_PASSWORD: ci-test-password
+          MYSQL_DATABASE: backend_learning_test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost -pci-test-password"
+          --health-interval=10s --health-timeout=5s --health-retries=10
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd="redis-cli ping"
+          --health-interval=5s --health-timeout=3s --health-retries=10
+    env:
+      DB_URL: jdbc:mysql://127.0.0.1:3306/backend_learning_test?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false
+      DB_USERNAME: root
+      DB_PASSWORD: ci-test-password
+      SPRING_DATA_REDIS_PASSWORD: ''
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v7
+
+      - name: 安装 JDK 21 并缓存 Maven 仓库
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: 全模块测试与打包
+        run: mvn -B clean verify -Dspring.data.redis.password=
+
+      - name: 验证可选 Druid 连接池
+        run: mvn -B -pl 05-mybatis -am -Pdruid test -Dspring.profiles.active=druid -Dtest=OrderLifecycleTest -Dsurefire.failIfNoSpecifiedTests=false
+
+      - name: 保存测试、覆盖率与 OpenAPI 报告
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: verification-reports
+          path: |
+            **/target/surefire-reports/*.xml
+            **/target/site/jacoco/**
+            10-doc/target/openapi/*.json
+
+      # 把打包好的 jar 传出去，deploy 阶段直接拿，不用重新编译
+      - name: 上传可运行 jar
+        uses: actions/upload-artifact@v7
+        with:
+          name: app-jar
+          path: 13-deploy/target/app.jar
+          retention-days: 7
+
+  # 第二段：构建镜像。用 commit SHA 做 tag，每个提交的镜像都能追溯
+  image:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v7
+
+      # 构建上下文是仓库根，Dockerfile 要读父 POM
+      - name: 构建镜像
+        run: |
+          docker build \
+            -f 13-deploy/Dockerfile \
+            -t backend-learning/13-deploy:${{ github.sha }} \
+            -t backend-learning/13-deploy:latest \
+            .
+
+      # 镜像跑起来探一次活，探针不通就让流水线红
+      - name: 冒烟测试
+        run: |
+          docker run -d --name smoke -p 8014:8014 backend-learning/13-deploy:${{ github.sha }}
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:8014/actuator/health/readiness; then
+              echo "服务已就绪"
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "启动超时，容器日志如下"
+          docker logs smoke
+          exit 1
+
+      - name: 清理容器
+        if: always()
+        run: docker rm -f smoke || true

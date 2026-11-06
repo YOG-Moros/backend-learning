@@ -1,0 +1,10 @@
+logging:
+  level:
+    root: warn
+    top.cch: info
+  file:
+    name: logs/app.log
+  logback:
+    rollingpolicy:
+      max-file-size: 20MB
+      max-history: 7

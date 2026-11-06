@@ -1,0 +1,13 @@
+spring:
+  sql:
+    init:
+      mode: never
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+cch:
+  jwt:
+    secret: ${JWT_SECRET}
+  sms:
+    mock-enabled: false

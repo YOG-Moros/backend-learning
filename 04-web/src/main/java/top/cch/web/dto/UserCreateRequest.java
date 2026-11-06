@@ -5,11 +5,6 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
-/**
- * 创建用户请求
- *
- * @author mqxu
- */
 @Data
 public class UserCreateRequest {
 

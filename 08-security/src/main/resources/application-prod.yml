@@ -1,0 +1,15 @@
+jwt:
+  secret: ${JWT_SECRET}
+mqxu:
+  security:
+    sms:
+      expose-code: false
+      auto-register: false
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  sql:
+    init:
+      mode: never

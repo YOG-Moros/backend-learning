@@ -1,0 +1,8 @@
+spring:
+  sql:
+    init:
+      mode: never
+  datasource:
+    url: ${ZHIHU_DB_URL}
+    username: ${ZHIHU_DB_USERNAME}
+    password: ${ZHIHU_DB_PASSWORD}

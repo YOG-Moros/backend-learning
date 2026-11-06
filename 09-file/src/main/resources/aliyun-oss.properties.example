@@ -1,0 +1,6 @@
+# 阿里云 OSS 连接配置模板：复制本文件为 aliyun-oss.properties 后填入真实值
+aliyun-oss.endpoint=oss-cn-hangzhou.aliyuncs.com
+aliyun-oss.bucket=你的bucket名
+aliyun-oss.dir=img/
+aliyun-oss.accessKey=你的AccessKeyID
+aliyun-oss.secretKey=你的AccessKeySecret

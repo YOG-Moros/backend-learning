@@ -25,29 +25,30 @@
         <module>04-web</module>
         <module>05-mybatis</module>
         <module>06-redis</module>
-        <module>07-mq</module>
-        <module>08-schedule</module>
-        <module>09-security</module>
-        <module>10-file</module>
-        <module>11-doc</module>
-        <module>12-test</module>
-        <module>13-actuator</module>
-        <module>14-deploy</module>
-        <module>15-zhihu</module>
-        <module>16-toolkit</module>
+        <module>07-schedule</module>
+        <module>08-security</module>
+        <module>09-file</module>
+        <module>10-doc</module>
+        <module>11-test</module>
+        <module>12-actuator</module>
+        <module>13-deploy</module>
+        <module>14-toolkit</module>
+        <module>15-cases</module>
     </modules>
 
     <properties>
         <java.version>21</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <mybatis-plus.version>3.5.17</mybatis-plus.version>
+        <jjwt.version>0.13.0</jjwt.version>
     </properties>
 
     <dependencies>
         <!-- Shared web stack for child modules. -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <artifactId>spring-boot-starter-webmvc</artifactId>
         </dependency>
 
         <!-- Compile-time annotations only; Lombok is not packaged at runtime. -->
@@ -59,12 +60,18 @@
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
+            <artifactId>spring-boot-starter-webmvc-test</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
 
     <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
         <pluginManagement>
             <plugins>
                 <plugin>

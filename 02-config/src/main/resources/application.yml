@@ -18,9 +18,11 @@ student:
   hobbies:
     - 篮球
     - 编程
+    - 阅读
   scores:
     chinese: 90
     math: 95
+    english: 88
   address:
     province: 江苏省
     city: 南京市
@@ -36,3 +38,6 @@ app:
   remark: SpringBoot配置学习
   port: 8002
   max-count: 100
+
+demo:
+  priority: application.yml 里的值

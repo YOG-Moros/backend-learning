@@ -1,0 +1,22 @@
+# 阿里云 OSS 真实密钥配置，绝不提交（模板文件 aliyun-oss.properties.example 可提交）
+10-file/src/main/resources/aliyun-oss.properties
+uploads/
+
+# Build output, local IDE/runtime state and refactoring recovery files
+**/target/
+.idea/
+*.iml
+*.log
+*.err
+*.dmp
+.tmp*/
+.tmp*
+.baseline*
+.refactor-backup/
+.acl-recovery/
+.workbuddy/
+.zcode/
+logs/
+node_modules/
+09-file/src/main/resources/aliyun-oss.properties
+**/aliyun-oss.properties

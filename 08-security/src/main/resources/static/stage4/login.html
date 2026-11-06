@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><title>表单登录与 CSRF</title>
+<body><h1>表单登录</h1><p>演示账号 alice，密码 123456。</p>
+<form method="post" action="/stage4/login">
+<label>用户名 <input name="username" autocomplete="username" required></label>
+<label>密码 <input name="password" type="password" autocomplete="current-password" required></label>
+<input type="hidden" name="_csrf" id="csrf"><button disabled id="submit">登录</button>
+</form><p id="status"></p>
+<script>
+fetch('/stage4/csrf').then(r => { if (!r.ok) throw Error(); return r.json(); }).then(data => {
+  document.querySelector('#csrf').value = data.token;
+  document.querySelector('#submit').disabled = false;
+}).catch(() => document.querySelector('#status').textContent = '无法获取安全令牌，请刷新后重试');
+</script></body></html>

@@ -18,11 +18,6 @@ import top.cch.web.dto.UserUpdateRequest;
 import top.cch.web.entity.User;
 import top.cch.web.service.UserService;
 
-/**
- * 用户接口
- *
- * @author mqxu
- */
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor

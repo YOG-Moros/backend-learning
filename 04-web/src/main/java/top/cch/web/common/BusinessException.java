@@ -2,10 +2,6 @@ package top.cch.web.common;
 
 import lombok.Getter;
 
-/**
- * 业务异常
- *
- */
 @Getter
 public class BusinessException extends RuntimeException {
 

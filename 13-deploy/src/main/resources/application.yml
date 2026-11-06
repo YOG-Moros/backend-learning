@@ -1,0 +1,17 @@
+server:
+  port: 8014
+
+spring:
+  application:
+    name: 14-部署与CI/CD
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true

@@ -1,0 +1,11 @@
+# 同时启用 Maven -Pdruid 与 Spring --spring.profiles.active=druid。
+# 使用 DruidConfig 绑定连接池；不安装旧 Boot 3 starter 或开放监控 Servlet。
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initial-size: 5
+      min-idle: 5
+      max-active: 10
+      max-wait: 3000
+      min-evictable-idle-time-millis: 600000

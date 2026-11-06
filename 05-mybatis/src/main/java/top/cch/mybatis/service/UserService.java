@@ -1,0 +1,50 @@
+package top.cch.mybatis.service;
+
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.spring.service.IService;
+import top.cch.mybatis.dto.UserQuery;
+import top.cch.mybatis.entity.User;
+
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
+
+public interface UserService extends IService<User> {
+
+    /* 增 */
+    boolean createUser(User user);
+    boolean createUserBatch(List<User> users);
+
+    /* 删 */
+    boolean removeUser(Long id);
+    boolean removeUserBatch(List<Long> ids);
+    boolean removeUserByStatus(Integer status);
+
+    /* 改 */
+    boolean modifyUser(User user);
+    boolean modifyUserStatus(Long id, Integer status);
+    boolean recharge(Long id, BigDecimal amount);
+
+    /* 8.2 练习 1：按 username 更新邮箱（LambdaUpdateWrapper） */
+    boolean modifyEmailByUsername(String username, String email);
+
+    /* 8.2 练习 4：连接池压测辅助——事务内先查库再 sleep，期间连接不归还 */
+    long slowCount(long ms);
+
+    /* 查（基础） */
+    User getUser(Long id);
+    List<User> listUsers();
+    Page<User> pageUsers(long current, long size);
+
+    /* 查（Lambda 条件） */
+    List<User> listByCondition(UserQuery query);
+    Page<User> pageByCondition(UserQuery query, long current, long size);
+    List<User> searchByKeyword(String keyword);
+    List<User> listByAgeRange(Integer minAge, Integer maxAge);
+    List<User> listTop(Integer limit);
+    List<String> listUsernames();
+    List<User> listByTag(String tag);
+    boolean existsUsername(String username);
+    long countByGender(Integer gender);
+    Map<String, Object> statistics();
+}

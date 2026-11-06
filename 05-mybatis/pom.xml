@@ -11,25 +11,19 @@
 
     <artifactId>05-mybatis</artifactId>
 
-    <properties>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-
     <dependencies>
         <!-- Spring Boot 4 用 -spring-boot4- 的 starter -->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-spring-boot4-starter</artifactId>
-            <version>3.5.17</version>
+            <version>${mybatis-plus.version}</version>
         </dependency>
 
         <!-- 分页插件依赖 JSqlParser，3.5.9 起拆成独立构件，需单独引入 -->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-jsqlparser</artifactId>
-            <version>3.5.17</version>
+            <version>${mybatis-plus.version}</version>
         </dependency>
         <dependency>
             <groupId>com.mysql</groupId>
@@ -45,22 +39,26 @@
         </dependency>
 
         <!-- Boot 4 把 MockMvc 测试支持拆成了独立 starter，starter-test 不再包含 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webmvc-test</artifactId>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
     <!-- Druid 只在 druid profile 下引入，默认构建仍是 HikariCP -->
     <profiles>
         <profile>
             <id>druid</id>
             <dependencies>
-                <!-- Druid 官方尚未发布 Boot 4 专用 starter，先用 Boot 3 版（走 AutoConfiguration.imports，实测可用性未验证） -->
+                <!-- 使用独立 Druid 库，由 DruidConfig 显式绑定 -->
                 <dependency>
                     <groupId>com.alibaba</groupId>
-                    <artifactId>druid-spring-boot-3-starter</artifactId>
+                    <artifactId>druid</artifactId>
                     <version>1.2.25</version>
                 </dependency>
             </dependencies>

@@ -4,11 +4,6 @@ import lombok.Data;
 
 import java.time.LocalDate;
 
-/**
- * 用户实体
- *
- * @author mqxu
- */
 @Data
 public class User {
     private Long id;

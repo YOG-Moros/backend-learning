@@ -1,0 +1,40 @@
+server:
+  port: 8008
+
+spring:
+  application:
+    name: 07-schedule
+  profiles:
+    active: dev
+  task:
+    scheduling:
+      pool:
+        size: 4
+      thread-name-prefix: sched-
+  mail:
+    host: smtp.qq.com
+    port: 587
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+
+weather:
+  api:
+    key: ${WEATHER_API_KEY:}
+    city: 101190101
+    url: ${WEATHER_API_URL:https://devapi.qweather.com/v7/weather/3d}
+
+email:
+  recipients: ${MAIL_RECIPIENTS:}
+
+cch:
+  schedule:
+    weather: "0 28 8 * * ?"
+    interval: "0/3 * * * * ?"

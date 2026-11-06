@@ -1,0 +1,26 @@
+server:
+  port: 8011
+  servlet:
+    encoding:
+      charset: UTF-8
+
+spring:
+  application:
+    name: 11-接口文档
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+    enabled: true
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: method
+    doc-expansion: list
+  group-configs:
+    - group: book
+      display-name: 图书业务
+      paths-to-match: /books/**
+    - group: ops
+      display-name: 运维接口
+      paths-to-match: /ops/**,/actuator/**

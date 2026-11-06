@@ -4,11 +4,15 @@ import top.cch.config.properties.StudentProperties;
 import top.cch.config.service.EnvService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.ConfigurableEnvironment;
+import org.springframework.core.env.EnumerablePropertySource;
+import org.springframework.core.env.PropertySource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -18,7 +22,11 @@ public class ConfigController {
 
     private final StudentProperties studentProperties;
 
+    private final top.cch.config.properties.AppProperties appProperties;
+
     private final EnvService envService;
+
+    private final ConfigurableEnvironment environment;
 
     @Value("${server.port}")
     private Integer serverPort;
@@ -82,5 +90,38 @@ public class ConfigController {
     @GetMapping("/app")
     public StudentProperties getApp() {
         return studentProperties;
+    }
+
+    @GetMapping("/app-properties")
+    public top.cch.config.properties.AppProperties applicationProperties() {
+        return appProperties;
+    }
+
+    @GetMapping("/profiles")
+    public Map<String, Object> getProfiles() {
+        Map<String, Object> info = new LinkedHashMap<>();
+        info.put("activeProfiles", List.of(environment.getActiveProfiles()));
+        info.put("defaultProfiles", List.of(environment.getDefaultProfiles()));
+        info.put("env.name", environment.getProperty("env.name"));
+        info.put("env.description", environment.getProperty("env.description"));
+        info.put("envService", envService.envInfo());
+        return info;
+    }
+
+    @GetMapping("/priority")
+    public Map<String, Object> getPriority() {
+        Map<String, Object> sources = new LinkedHashMap<>();
+        for (PropertySource<?> source : environment.getPropertySources()) {
+            if (source instanceof EnumerablePropertySource<?> enumerable
+                    && enumerable.containsProperty("demo.priority")) {
+                sources.put(source.getName(), enumerable.getProperty("demo.priority"));
+            }
+        }
+        Map<String, Object> info = new LinkedHashMap<>();
+        info.put("最终取值", environment.getProperty("demo.priority"));
+        info.put("命中来源数", sources.size());
+        info.put("各来源的值", sources);
+        info.put("覆盖顺序", "命令行参数 > 系统属性 > 环境变量 > application-{profile}.yml > application.yml");
+        return info;
     }
 }

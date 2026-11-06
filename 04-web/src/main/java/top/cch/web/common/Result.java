@@ -2,11 +2,6 @@ package top.cch.web.common;
 
 import lombok.Data;
 
-/**
- * 统一响应体
- *
- * @author mqxu
- */
 @Data
 public class Result<T> {
 

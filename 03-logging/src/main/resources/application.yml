@@ -1,0 +1,18 @@
+server:
+  port: 8003
+
+spring:
+  application:
+    name: 03-日志管理
+  profiles:
+    active: dev
+  output:
+    ansi:
+      enabled: always
+
+logging:
+  level:
+    root: info
+    top.cch.logging: debug
+  file:
+    name: logs/app.log

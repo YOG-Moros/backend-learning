@@ -1,0 +1,18 @@
+groups:
+  - name: business
+    rules:
+      - alert: OrderFailureRateHigh
+        expr: sum(rate(business_orders_failed_total[5m])) / clamp_min(sum(rate(business_orders_created_total[5m])) + sum(rate(business_orders_failed_total[5m])), 0.001) > 0.05
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: '订单失败率持续超过 5%'
+      # 业务 Timer 是 summary，此处用其分位数，不引用不存在的 bucket。
+      - alert: OrderLatencyHigh
+        expr: business_order_handle_seconds{quantile="0.95",result="success"} > 1
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: '单实例订单 P95 持续超过 1 秒'

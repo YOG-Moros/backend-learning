@@ -1,0 +1,10 @@
+global:
+  scrape_interval: 15s
+rule_files:
+  - alerts.yml
+scrape_configs:
+  - job_name: backend-learning
+    metrics_path: /actuator/prometheus
+    static_configs:
+      # 默认兼容端口；使用 spec profile 时改为 8012。
+      - targets: ['host.docker.internal:8013']

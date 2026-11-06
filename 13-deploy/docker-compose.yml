@@ -1,0 +1,29 @@
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: 13-deploy/Dockerfile
+    image: backend-learning/13-deploy:1.0.0
+    container_name: deploy-app
+    ports:
+      - "8014:8014"
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      JAVA_OPTS: "-XX:MaxRAMPercentage=75 -Xms256m"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8014/actuator/health"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: "1.0"
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
